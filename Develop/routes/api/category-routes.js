@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
-  Category.findOne(req.params.id).then((categoryData) => {
+  Category.findByPk(req.params.id).then((categoryData) => {
     res.json(categoryData)
   })
 });
@@ -32,13 +32,14 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/', async (req, res) => {
   // update a category by its `id` value
-  Category.update(req.body, {
+  const categoryData = await Category.update(req.body, {
     where: {
       id: req.params.id,
     },
   }).catch((err) => res.status(400).json(err));
+  res.json(categoryData)
 });
 
 router.delete('/:id', async (req, res) => {

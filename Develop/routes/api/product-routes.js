@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-  Product.findOne(req.params.id).then((productData) => {
+  Product.findByPk(req.params.id).then((productData) => {
     res.json(productData)
   })
 });
@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/', (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
